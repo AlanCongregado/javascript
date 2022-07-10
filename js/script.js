@@ -44,3 +44,25 @@ while (numero <= 50) {
     console.log(numero);
     numero +=5;
 } */
+
+/* Desafio 2 */
+
+let pinUsuario = '1287';
+let ingresar = false;
+
+for(let i = 2; i >= 0; i--){
+    let pinIngresado = prompt("ingrese su pin");
+    if(pinIngresado == pinUsuario){
+        alert('Login exitoso');
+        ingresar = true;
+        break
+    }else {
+        alert('Error. te quedan ' + i + ' intentos');
+    }
+}
+
+if(ingresar){
+    
+}
+
+
