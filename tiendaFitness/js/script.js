@@ -3,6 +3,9 @@ productAddButtons.forEach((productAddButton) => {
   productAddButton.addEventListener("click", addToCart);
 });
 
+const comprarButton = document.querySelector(".comprarButton");
+comprarButton.addEventListener("click", comprarButtonClicked);
+
 const shoppingCartItemsContainer = document.querySelector(
   ".shoppingCartItemsContainer"
 );
@@ -19,6 +22,23 @@ function addToCart(e) {
 }
 
 function addItemToShoppingCart(itemTitle, itemPrice, itemImage) {
+  const elementsTitle = shoppingCartItemsContainer.getElementsByClassName(
+    "shoppingCartItemTitle"
+  );
+  for (let i = 0; i < elementsTitle.length; i++) {
+    if (elementsTitle[i].innerText === itemTitle) {
+      let elementQuantity = elementsTitle[
+        i
+      ].parentElement.parentElement.parentElement.querySelector(
+        ".shoppingCartItemQuantity"
+      );
+      elementQuantity.value++;
+      $(".toast").toast("show");
+      updateCartTotal();
+      return;
+    }
+  }
+
   const shoppingCartRow = document.createElement("div");
   const shoppingCartContent = `
   <div class="row shoppingCartItem">
@@ -91,5 +111,10 @@ function quantityChanged(e) {
   if (input.value <= 0) {
     input.value = 1;
   }
+  updateCartTotal();
+}
+
+function comprarButtonClicked() {
+  shoppingCartItemsContainer.innerHTML = "";
   updateCartTotal();
 }
